@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="head"></div>
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="game-main">
+        <nav class="side-bar" id="sideBar"></nav>
+        <div class="game-container">
+            <div class="game-header">
+                <h2>🏳️ Guess the Flag</h2>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Score:</span>
+                        <span id="score" class="stat-value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Question:</span>
+                        <span id="question-num" class="stat-value">1/10</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Streak:</span>
+                        <span id="streak" class="stat-value">0🔥</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="game-area" class="game-area">
+                <div class="flag-display">
+                    <img id="flag-image" src="" alt="Flag to guess">
+                </div>
+                <div class="question-text">
+                    <p>Which country does this flag belong to?</p>
+                </div>
+                <div class="options-grid" id="options-grid">
+                    <!-- Options will be inserted here -->
+                </div>
+            </div>
+
+            <div id="result-screen" class="result-screen hidden">
+                <div class="result-content">
+                    <h2 id="result-title">🎉 Game Complete!</h2>
+                    <div class="final-stats">
+                        <div class="final-stat">
+                            <span class="final-stat-value" id="final-score">0</span>
+                            <span class="final-stat-label">Final Score</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-value" id="correct-answers">0</span>
+                            <span class="final-stat-label">Correct</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-value" id="best-streak">0</span>
+                            <span class="final-stat-label">Best Streak</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="play-again-btn" class="primary-btn">Play Again</button>
+                        <button id="back-home-btn" class="secondary-btn">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="github-fab-container" id="fab"></div>
+
+    <script src="js/guessFlagGame.js" type="module"></script>
+</body>
+</html>

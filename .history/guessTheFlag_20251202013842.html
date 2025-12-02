@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="head"></div>
+
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="game-main">
+        <nav class="side-bar" id="sideBar"></nav>
+        <section class="game-container" id="guess-flag-game">
+            <!-- Mode Selection Screen -->
+            <div id="mode-selection" class="mode-selection">
+                <h2>Choose Your Mode</h2>
+                <div class="modes-grid">
+                    <button class="mode-card" data-mode="hybrid">
+                        <div class="mode-icon">⚡</div>
+                        <h3>Hybrid Timer</h3>
+                        <p>12s per question + reserve pool. Fast answers earn time bonuses!</p>
+                        <span class="mode-difficulty">⭐⭐ Balanced</span>
+                    </button>
+                    <button class="mode-card" data-mode="speed-run">
+                        <div class="mode-icon">🏃</div>
+                        <h3>Speed Run</h3>
+                        <p>120s total for 10 questions. Manage your time wisely!</p>
+                        <span class="mode-difficulty">⭐⭐⭐ Challenging</span>
+                    </button>
+                    <button class="mode-card" data-mode="sudden-death">
+                        <div class="mode-icon">💀</div>
+                        <h3>Sudden Death</h3>
+                        <p>One mistake and you're out. How far can you go?</p>
+                        <span class="mode-difficulty">⭐⭐⭐⭐ Expert</span>
+                    </button>
+                    <button class="mode-card" data-mode="typing">
+                        <div class="mode-icon">⌨️</div>
+                        <h3>Type It!</h3>
+                        <p>Type the country name with autocomplete. Test your spelling!</p>
+                        <span class="mode-difficulty">⭐⭐⭐ Challenging</span>
+                    </button>
+                    <button class="mode-card" data-mode="blitz">
+                        <div class="mode-icon">⚡💨</div>
+                        <h3>Blitz Mode</h3>
+                        <p>7s per question, no reserve. Lightning fast reflexes!</p>
+                        <span class="mode-difficulty">⭐⭐⭐⭐ Expert</span>
+                    </button>
+                    <button class="mode-card" data-mode="marathon">
+                        <div class="mode-icon">🏅</div>
+                        <h3>Marathon</h3>
+                        <p>20 questions, relaxed 15s timer. Go the distance!</p>
+                        <span class="mode-difficulty">⭐ Casual</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="game-header hidden">
+                <div class="mode-header">
+                    <button id="back-to-modes" class="mode-back-btn">← Change Mode</button>
+                    <div id="mode-name" class="current-mode"></div>
+                </div>
+                <div class="quiz-question"><div id="gf-question-text" class="question-text">Which country does this flag belong to?</div></div>
+                <div class="game-stats">
+                    <div class="stat"><span class="stat-label">Score</span><span id="gf-score" class="stat-value">0</span></div>
+                    <div class="stat"><span class="stat-label">Streak</span><span id="gf-streak" class="stat-value">0</span></div>
+                    <div class="stat"><span class="stat-label">Question</span><span id="gf-question" class="stat-value">1/10</span></div>
+                    <div class="stat" id="timer-stat"><span class="stat-label">Time</span><span id="gf-timer" class="stat-value">12</span></div>
+                    <div class="stat hidden" id="reserve-stat"><span class="stat-label">Reserve</span><span id="gf-reserve" class="stat-value">0</span></div>
+                    <div class="stat hidden" id="lives-stat"><span class="stat-label">Lives</span><span id="gf-lives" class="stat-value">❤️</span></div>
+                </div>
+                <div class="timer-bar"><div id="gf-timer-fill" class="timer-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="game-area hidden">
+                <div class="flag-display"><img id="gf-flag" alt="Country flag" /></div>
+                <div id="gf-options" class="options-grid"></div>
+                <div id="gf-typing-input" class="typing-input-container hidden">
+                    <input type="text" id="gf-type-input" class="country-type-input" placeholder="Type country name..." autocomplete="off" />
+                    <div id="gf-autocomplete" class="autocomplete-suggestions"></div>
+                </div>
+            </div>
+            <div class="result-screen hidden" id="gf-result">
+                <div class="result-content">
+                    <h2>Great Job!</h2>
+                    <div class="final-stats">
+                        <div class="final-stat"><span id="gf-final-score" class="final-stat-value">0</span><span class="final-stat-label">Total Score</span></div>
+                        <div class="final-stat"><span id="gf-final-correct" class="final-stat-value">0</span><span class="final-stat-label">Correct Answers</span></div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="gf-restart" class="primary-btn">Play Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="github-fab-container" id="fab"></div>
+
+
+    <script src="js/guessTheFlag.js" type="module"></script>
+</body>
+</html>

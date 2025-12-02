@@ -4,3 +4,10 @@
 node_modules
 dist
 .cache
+.history
+.vscode
+.DS_Store
+.env
+.env.local
+.idea
+*.log

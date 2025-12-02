@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="head"></div>
+
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="game-main">
+        <nav class="side-bar" id="sideBar"></nav>
+        <section class="game-container" id="guess-flag-game">
+            <div class="game-header">
+                <div class="quiz-question"><div id="gf-question-text" class="question-text">Which country does this flag belong to?</div></div>
+                <div class="game-stats">
+                    <div class="stat"><span class="stat-label">Score</span><span id="gf-score" class="stat-value">0</span></div>
+                    <div class="stat"><span class="stat-label">Streak</span><span id="gf-streak" class="stat-value">0</span></div>
+                    <div class="stat"><span class="stat-label">Question</span><span id="gf-question" class="stat-value">1/10</span></div>
+                    <div class="stat"><span class="stat-label">Time</span><span id="gf-timer" class="stat-value">12</span></div>
+                    <div class="stat"><span class="stat-label">Reserve</span><span id="gf-reserve" class="stat-value">0</span></div>
+                </div>
+                <div class="timer-bar"><div id="gf-timer-fill" class="timer-fill" style="width: 100%"></div></div>
+            </div>
+            <div class="game-area">
+                <div class="flag-display"><img id="gf-flag" alt="Country flag" /></div>
+                <div id="gf-options" class="options-grid"></div>
+            </div>
+            <div class="result-screen hidden" id="gf-result">
+                <div class="result-content">
+                    <h2>Great Job!</h2>
+                    <div class="final-stats">
+                        <div class="final-stat"><span id="gf-final-score" class="final-stat-value">0</span><span class="final-stat-label">Total Score</span></div>
+                        <div class="final-stat"><span id="gf-final-correct" class="final-stat-value">0</span><span class="final-stat-label">Correct Answers</span></div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="gf-restart" class="primary-btn">Play Again</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div class="github-fab-container" id="fab"></div>
+
+
+    <script src="js/guessTheFlag.js" type="module"></script>
+</body>
+</html>

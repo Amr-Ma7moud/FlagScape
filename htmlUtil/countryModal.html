@@ -1,0 +1,39 @@
+<div id="country-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-overlay" aria-hidden="true"></div>
+    <div class="modal-content">
+        <button class="modal-close" aria-label="Close modal">&times;</button>
+        <div class="modal-body">
+            <div class="country-flag-container">
+                <img id="modal-flag" src="" alt="" class="country-flag">
+            </div>
+            <h2 id="modal-title" class="country-name"></h2>
+            <div class="country-details">
+                <div class="detail-item">
+                    <span class="detail-label">📍 Capital:</span>
+                    <span id="modal-capital" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">🌍 Region:</span>
+                    <span id="modal-region" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">👥 Population:</span>
+                    <span id="modal-population" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">🗣️ Languages:</span>
+                    <span id="modal-languages" class="detail-value"></span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">💰 Currency:</span>
+                    <span id="modal-currency" class="detail-value"></span>
+                </div>
+            </div>
+            <div class="modal-actions">
+                <button id="modal-details-btn" class="details-btn">
+                    View Full Details
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

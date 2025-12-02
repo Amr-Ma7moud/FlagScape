@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="head"></div>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="country-details-main">
+        <nav class="side-bar" id="sideBar"></nav>
+        
+        <div class="country-details-container">
+            <div class="details-header">
+                <button id="back-btn" class="back-btn">← Back to Map</button>
+                <div class="country-hero">
+                    <img id="country-flag" src="" alt="Country flag" class="hero-flag">
+                    <div class="hero-info">
+                        <h1 id="country-name">Loading...</h1>
+                        <p id="country-motto" class="country-motto"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details-grid">
+                <!-- Basic Info Card -->
+                <div class="info-card">
+                    <h3>📋 Basic Information</h3>
+                    <div class="info-list">
+                        <div class="info-row">
+                            <span class="info-label">Official Name:</span>
+                            <span id="official-name" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Capital:</span>
+                            <span id="capital" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Region:</span>
+                            <span id="region" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Subregion:</span>
+                            <span id="subregion" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Area:</span>
+                            <span id="area" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Demographics Card -->
+                <div class="info-card">
+                    <h3>👥 Demographics</h3>
+                    <div class="info-list">
+                        <div class="info-row">
+                            <span class="info-label">Population:</span>
+                            <span id="population" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Density:</span>
+                            <span id="density" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Life Expectancy:</span>
+                            <span id="life-expectancy" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Literacy Rate:</span>
+                            <span id="literacy-rate" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Language & Culture Card -->
+                <div class="info-card">
+                    <h3>🗣️ Language & Culture</h3>
+                    <div class="info-list">
+                        <div class="info-row">
+                            <span class="info-label">Languages:</span>
+                            <span id="languages" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Religions:</span>
+                            <span id="religions" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Ethnic Groups:</span>
+                            <span id="ethnic-groups" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Economy Card -->
+                <div class="info-card">
+                    <h3>💰 Economy</h3>
+                    <div class="info-list">
+                        <div class="info-row">
+                            <span class="info-label">Currency:</span>
+                            <span id="currency" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">GDP:</span>
+                            <span id="gdp" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">GDP per Capita:</span>
+                            <span id="gdp-per-capita" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Main Industries:</span>
+                            <span id="industries" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geography Card -->
+                <div class="info-card">
+                    <h3>🗺️ Geography</h3>
+                    <div class="info-list">
+                        <div class="info-row">
+                            <span class="info-label">Coordinates:</span>
+                            <span id="coordinates" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Borders:</span>
+                            <span id="borders" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Coastline:</span>
+                            <span id="coastline" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Highest Point:</span>
+                            <span id="highest-point" class="info-value">-</span>
+                        </div>
+                        <div class="info-row">
+                            <span class="info-label">Climate:</span>
+                            <span id="climate" class="info-value">-</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fun Facts Card -->
+                <div class="info-card fun-facts-card">
+                    <h3>✨ Fun Facts</h3>
+                    <div id="fun-facts" class="fun-facts-list">
+                        <!-- Facts will be inserted here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    
+    <div class="github-fab-container" id="fab"></div>
+    <script src="js/countryDetails.js" type="module"></script>
+</body>
+</html>

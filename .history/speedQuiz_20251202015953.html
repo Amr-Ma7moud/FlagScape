@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="head"></div>
+    <link rel="stylesheet" href="css/games.css">
+</head>
+<body>
+    <div id="header"></div>
+
+    <main class="game-main">
+        <nav class="side-bar" id="sideBar"></nav>
+        <div class="game-container">
+            <div class="game-header">
+                <h2>⚡ Geography Speed Quiz</h2>
+                <div class="game-stats">
+                    <div class="stat">
+                        <span class="stat-label">Score:</span>
+                        <span id="score" class="stat-value">0</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Time:</span>
+                        <span id="timer" class="stat-value timer-critical">60s</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">Combo:</span>
+                        <span id="combo" class="stat-value">x1</span>
+                    </div>
+                </div>
+                <div class="timer-bar">
+                    <div id="timer-fill" class="timer-fill"></div>
+                </div>
+            </div>
+
+            <div id="game-area" class="game-area">
+                <div class="quiz-question">
+                    <p id="question-text" class="question-text">Get ready...</p>
+                </div>
+                <div class="options-grid speed-options" id="options-grid">
+                    <!-- Options will be inserted here -->
+                </div>
+            </div>
+
+            <div id="result-screen" class="result-screen hidden">
+                <div class="result-content">
+                    <h2 id="result-title">⚡ Speed Run Complete!</h2>
+                    <div class="final-stats">
+                        <div class="final-stat">
+                            <span class="final-stat-value" id="final-score">0</span>
+                            <span class="final-stat-label">Final Score</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-value" id="correct-answers">0</span>
+                            <span class="final-stat-label">Correct</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-value" id="max-combo">x1</span>
+                            <span class="final-stat-label">Max Combo</span>
+                        </div>
+                    </div>
+                    <div class="result-actions">
+                        <button id="play-again-btn" class="primary-btn">Play Again</button>
+                        <button id="back-home-btn" class="secondary-btn">Back to Home</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="github-fab-container" id="fab"></div>
+
+    <script src="js/speedQuiz.js" type="module"></script>
+</body>
+</html>
