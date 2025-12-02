@@ -1,0 +1,45 @@
+/* Floating GitHub Buttons */
+.github-fab-container {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 1000;
+}
+
+.github-fab {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #24292e 0%, #1a1e22 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 50px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    font-weight: 600;
+    font-size: 0.95em;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.github-fab:hover {
+    background: linear-gradient(135deg, #2ea44f 0%, #238636 100%);
+    border-color: #2ea44f;
+    box-shadow: 0 6px 30px rgba(46, 164, 79, 0.5);
+    transform: translateY(-3px) scale(1.05);
+}
+
+.github-fab:active {
+    transform: translateY(-1px) scale(1.02);
+}
+
+.github-fab svg {
+    flex-shrink: 0;
+}
+
+.github-fab span {
+    white-space: nowrap;
+}

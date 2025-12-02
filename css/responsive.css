@@ -1,0 +1,161 @@
+/* Responsive Design */
+@media (max-width: 1024px) {
+    main {
+        flex-direction: column;
+    }
+    
+    .side-bar {
+        flex: 0 0 auto;
+        width: 100%;
+    }
+    
+    header h1 {
+        font-size: 2em;
+    }
+
+    .country-details-main {
+        flex-direction: column;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    header {
+        padding: 15px 20px;
+    }
+    
+    header h1 {
+        font-size: 1.5em;
+    }
+    
+    main {
+        padding: 10px;
+        gap: 10px;
+        flex-direction: column;
+    }
+    
+    /* Show hamburger menu */
+    .menu-toggle {
+        display: flex;
+    }
+    
+    /* Mobile sidebar */
+    .side-bar {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 280px;
+        height: calc(100vh - 70px);
+        z-index: 1000;
+        transition: left 0.3s ease;
+        border-radius: 0;
+        flex: none;
+    }
+    
+    .side-bar.mobile-open {
+        left: 0;
+    }
+    
+    /* Overlay when menu is open */
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    .map-container {
+        padding: 15px;
+        width: 100%;
+        margin: 0;
+    }
+    
+    .map-container legend {
+        font-size: 1.3em;
+    }
+    
+    #map-container {
+        height: 400px;
+        min-height: 300px;
+    }
+    
+    #map-container svg {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+    
+    .github-fab-container {
+        bottom: 15px;
+        right: 15px;
+    }
+    
+    .github-fab {
+        padding: 10px 16px;
+        font-size: 0.85em;
+    }
+
+    /* Modal responsive */
+    .modal-content {
+        width: 95%;
+        max-height: 85vh;
+    }
+
+    .modal-body {
+        padding: 30px 20px 20px;
+    }
+
+    .country-name {
+        font-size: 1.8em;
+    }
+
+    .detail-label {
+        min-width: 120px;
+        font-size: 0.95em;
+    }
+
+    .quiz-btn, .details-btn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+
+    /* Country details responsive */
+    .country-hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-flag {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+    }
+
+    .hero-info h1 {
+        font-size: 2em;
+    }
+
+    .details-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .info-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .info-value {
+        text-align: left;
+    }
+}

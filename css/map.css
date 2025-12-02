@@ -1,0 +1,86 @@
+/* Map Container Styles */
+.map-container {
+    flex: 1;
+    padding: 30px;
+    border: 3px solid #2c3e50;
+    border-radius: 20px;
+    background-color: #f8f9fa;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.map-container:hover {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+
+.map-container legend {
+    padding: 10px 25px;
+    font-size: 1.8em;
+    font-weight: 700;
+    color: #2c3e50;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 600px;
+    display: block;
+    border: none;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+#map-container {
+    border-radius: 15px;
+    overflow: hidden;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 500px;
+    max-height: 800px;
+    height: 100%;
+    background: #f8f9fa;
+}
+
+#map-container svg {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+    object-fit: contain;
+    background: transparent;
+}
+
+/* Special case for world map: force centering and scaling */
+#map-container svg[viewBox*="-180"] {
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
+    margin: auto;
+    display: block;
+    object-fit: contain;
+}
+
+/* Country path styling - consistent colors for all maps */
+#map-container path {
+    fill: #c3c3c3 !important;
+    stroke: #2c3e50 !important;
+    stroke-width: 1 !important;
+    transition: all 0.3s ease !important;
+}
+
+#map-container path:hover {
+    fill: #dfb417 !important;
+    cursor: pointer !important;
+    stroke: #2c3e50 !important;
+    stroke-width: 1.5 !important;
+}

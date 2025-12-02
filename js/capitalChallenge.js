@@ -1,11 +1,11 @@
 import { embedHTML } from "../util/utils.js"
 
 async function initializePage() {
-  await embedHTML("head", "/htmlUtil/head.html");
+  await embedHTML("head", "htmlUtil/head.html");
   document.title = "FlagScape - Capital Challenge";
-  await embedHTML("header", "/htmlUtil/header.html");
-  await embedHTML("sideBar", "/htmlUtil/sideBar.html");
-  await embedHTML("fab", "/htmlUtil/fab.html").then(() => {
+  await embedHTML("header", "htmlUtil/header.html");
+  await embedHTML("sideBar", "htmlUtil/sideBar.html");
+  await embedHTML("fab", "htmlUtil/fab.html").then(() => {
     document.getElementById("hekal").appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
   });
   

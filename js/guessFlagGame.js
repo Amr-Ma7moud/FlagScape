@@ -2,11 +2,11 @@ import { embedHTML } from "../util/utils.js"
 
 // Load HTML components
 async function initializePage() {
-  await embedHTML("head", "/htmlUtil/head.html");
+  await embedHTML("head", "htmlUtil/head.html");
   document.title = "FlagScape - Guess the Flag";
-  await embedHTML("header", "/htmlUtil/header.html");
-  await embedHTML("sideBar", "/htmlUtil/sideBar.html");
-  await embedHTML("fab", "/htmlUtil/fab.html");
+  await embedHTML("header", "htmlUtil/header.html");
+  await embedHTML("sideBar", "htmlUtil/sideBar.html");
+  await embedHTML("fab", "htmlUtil/fab.html");
   document.getElementById("hekal")?.appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
   
   startGame();

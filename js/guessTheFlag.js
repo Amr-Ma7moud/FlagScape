@@ -1,11 +1,11 @@
 import { embedHTML } from "../util/utils.js";
 
 // Load shared components
-await embedHTML("head", "/htmlUtil/head.html");
+await embedHTML("head", "htmlUtil/head.html");
 document.title = "Flag Scape - Guess The Flag";
-await embedHTML("header", "/htmlUtil/header.html");
-await embedHTML("sideBar", "/htmlUtil/sideBar.html");
-await embedHTML("fab", "/htmlUtil/fab.html");
+await embedHTML("header", "htmlUtil/header.html");
+await embedHTML("sideBar", "htmlUtil/sideBar.html");
+await embedHTML("fab", "htmlUtil/fab.html");
 document.getElementById("hekal")?.appendChild(document.createElement("span")).append("3mk Hekal");
 
 // Game modes configuration

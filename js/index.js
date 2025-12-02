@@ -26,7 +26,7 @@ function displayMap( mapUri = "world.svg", continentName = "World" ){
   }
 
   // Remove selected class from all navigation buttons
-  document.querySelectorAll('.world-map-btn, details button').forEach(btn => {
+  document.querySelectorAll('.world-map-btn, details a').forEach(btn => {
     btn.classList.remove('selected');
   });
 
@@ -35,11 +35,11 @@ function displayMap( mapUri = "world.svg", continentName = "World" ){
     const worldBtn = document.getElementById('world-map');
     if (worldBtn) worldBtn.classList.add('selected');
   } else {
-    // Find and select the continent button
-    const continentBtns = document.querySelectorAll('details button[id]');
-    continentBtns.forEach(btn => {
-      if (btn.textContent.trim() === continentName) {
-        btn.classList.add('selected');
+    // Find and select the continent link
+    const continentLinks = document.querySelectorAll('details a[id]');
+    continentLinks.forEach(link => {
+      if (link.textContent.trim() === continentName) {
+        link.classList.add('selected');
       }
     });
   }
@@ -85,73 +85,109 @@ function displayMap( mapUri = "world.svg", continentName = "World" ){
 }
 
 function setupNavigationListeners() {
+  // Check if we're on the index page
+  const isIndexPage = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/');
+  
+  if (!isIndexPage) {
+    // Not on index page, let anchors work normally
+    return;
+  }
+
+  // On index page: prevent default and use JavaScript navigation
   // Handle World Map button
   const worldMapBtn = document.getElementById("world-map");
   if (worldMapBtn) {
-    worldMapBtn.addEventListener('click', () => {
+    worldMapBtn.addEventListener('click', (e) => {
+      e.preventDefault();
       console.log('Loading World Map');
       displayMap('world.svg', 'World');
+      // Update URL without reload
+      window.history.pushState({}, '', 'index.html');
     });
   }
 
   // Handle continent navigation
   const continentContainer = document.getElementById("continents");
   if (continentContainer) {
-    const continentItems = continentContainer.querySelectorAll('button[id]');
-    console.log(`Found ${continentItems.length} continent buttons`);
+    const continentItems = continentContainer.querySelectorAll('a[id]');
+    console.log(`Found ${continentItems.length} continent links`);
     continentItems.forEach(continent => {
       continent.addEventListener('click', (e) => {
+        e.preventDefault();
         const continentId = continent.id;
         const mapFile = continentMaps[continentId];
         const continentName = continent.textContent.trim();
         if (mapFile) {
           console.log(`Loading map for ${continentName}: ${mapFile}`);
           displayMap(mapFile, continentName);
-        }
-      });
-    });
-  }
-  
-  // Handle game navigation
-  const gamesContainer = document.getElementById("games");
-  if (gamesContainer) {
-    const gameItems = gamesContainer.parentElement.querySelectorAll('button[id]');
-    console.log(`Found ${gameItems.length} game buttons`);
-    gameItems.forEach(game => {
-      game.addEventListener('click', (e) => {
-        const gameId = game.id;
-        const gamePage = gamePages[gameId];
-        if (gamePage) {
-          console.log(`Navigating to ${game.textContent}: ${gamePage}`);
-          window.location.href = gamePage;
+          // Update URL without reload
+          window.history.pushState({}, '', `index.html?continent=${continentId}`);
         }
       });
     });
   }
 }
 
+function setupMobileMenu() {
+  const menuToggle = document.getElementById('menu-toggle');
+  const sidebar = document.getElementById('sideBar');
+  const overlay = document.getElementById('sidebar-overlay');
+  
+  if (!menuToggle || !sidebar || !overlay) return;
+  
+  const toggleMenu = () => {
+    menuToggle.classList.toggle('active');
+    sidebar.classList.toggle('mobile-open');
+    overlay.classList.toggle('active');
+  };
+  
+  menuToggle.addEventListener('click', toggleMenu);
+  overlay.addEventListener('click', toggleMenu);
+  
+  // Close menu when clicking on a navigation item
+  sidebar.addEventListener('click', (e) => {
+    if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') {
+      if (window.innerWidth <= 768) {
+        toggleMenu();
+      }
+    }
+  });
+}
+
 // Load all HTML components and wait for them to finish
 async function initializePage() {
-  await embedHTML("head", "/htmlUtil/head.html");
-  await embedHTML("header", "/htmlUtil/header.html");
-  await embedHTML("sideBar", "/htmlUtil/sideBar.html");
-  await embedHTML("map", "/htmlUtil/map.html");
-  await embedHTML("fab", "/htmlUtil/fab.html");
+  await embedHTML("head", "htmlUtil/head.html");
+  await embedHTML("header", "htmlUtil/header.html");
+  await embedHTML("sideBar", "htmlUtil/sideBar.html");
+  await embedHTML("map", "htmlUtil/map.html");
+  await embedHTML("fab", "htmlUtil/fab.html");
   
   // Load country modal
   const modalContainer = document.createElement('div');
   document.body.appendChild(modalContainer);
-  await embedHTML(modalContainer.id = 'modal-root', "/htmlUtil/countryModal.html");
+  await embedHTML(modalContainer.id = 'modal-root', "htmlUtil/countryModal.html");
   await countryModal.init();
   
   // Now that sidebar is loaded, set up event listeners
   setupNavigationListeners();
+  setupMobileMenu();
   
   // Add Hekal span after fab is loaded as something weird happens here his nae doesn't render at the screen
   document.getElementById("hekal").appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
   
-  // Display the world map initially
-  displayMap('world.svg', 'World');
+  // Check URL parameters for continent
+  const urlParams = new URLSearchParams(window.location.search);
+  const continentParam = urlParams.get('continent');
+  
+  if (continentParam && continentMaps[continentParam]) {
+    // Load the continent from URL parameter
+    const continentLink = document.getElementById(continentParam);
+    const continentName = continentLink ? continentLink.textContent.trim() : continentParam;
+    displayMap(continentMaps[continentParam], continentName);
+  } else {
+    // Display the world map initially
+    displayMap('world.svg', 'World');
+  }
 }
 
 // Initialize the page
