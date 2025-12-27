@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <div id="head"></div>
+    <!-- jQuery CDN - Required for rubric -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+            crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="header"></div>
+    
+    <!-- Hamburger menu button for mobile -->
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <!-- Sidebar overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+    <main>
+        <nav class="side-bar" id="sideBar"></nav>
+        <section class="contact-container">
+            <div class="contact-header">
+                <h1>Contact Us</h1>
+                <p>We'd love to hear from you! Fill out the form below to get in touch.</p>
+            </div>
+
+            <div class="form-wrapper">
+                <form id="contact-form" novalidate>
+                    <!-- Personal Information Section -->
+                    <div class="form-section">
+                        <h2>Personal Information</h2>
+                        
+                        <!-- Float layout: Two columns -->
+                        <div class="form-row float-row">
+                            <div class="form-group float-left">
+                                <label for="firstName">First Name <span class="required">*</span></label>
+                                <input type="text" id="firstName" name="firstName" required>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group float-right">
+                                <label for="lastName">Last Name <span class="required">*</span></label>
+                                <input type="text" id="lastName" name="lastName" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+
+                        <!-- Email and Phone in float layout -->
+                        <div class="form-row float-row">
+                            <div class="form-group float-left">
+                                <label for="email">Email Address <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" required>
+                                <span class="error-message"></span>
+                            </div>
+                            
+                            <div class="form-group float-right">
+                                <label for="phone">Phone Number <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" placeholder="+20 1234567890" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!-- Account Information Section -->
+                    <div class="form-section">
+                        <h2>Account Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="username">Username <span class="required">*</span></label>
+                            <input type="text" id="username" name="username" required>
+                            <span class="error-message"></span>
+                        </div>
+
+                        <!-- Password fields in float layout -->
+                        <div class="form-row float-row">
+                            <div class="form-group float-left">
+                                <label for="password">Password <span class="required">*</span></label>
+                                <input type="password" id="password" name="password" required>
+                                <span class="error-message"></span>
+                                <div class="password-hint">
+                                    Must contain: 8+ characters, uppercase, lowercase, number, special character
+                                </div>
+                            </div>
+                            
+                            <div class="form-group float-right">
+                                <label for="confirmPassword">Confirm Password <span class="required">*</span></label>
+                                <input type="password" id="confirmPassword" name="confirmPassword" required>
+                                <span class="error-message"></span>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+
+                    <!-- Additional Information -->
+                    <div class="form-section">
+                        <h2>Additional Information</h2>
+                        
+                        <div class="form-group">
+                            <label for="country">Favorite Country</label>
+                            <select id="country" name="country">
+                                <option value="">Select a country...</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" rows="5" placeholder="Tell us what you think about FlagScape..."></textarea>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="newsletter" name="newsletter">
+                                <span>Subscribe to our newsletter</span>
+                            </label>
+                        </div>
+
+                        <div class="form-group checkbox-group">
+                            <label>
+                                <input type="checkbox" id="terms" name="terms" required>
+                                <span>I agree to the terms and conditions <span class="required">*</span></span>
+                            </label>
+                            <span class="error-message"></span>
+                        </div>
+                    </div>
+
+                    <!-- Form Actions -->
+                    <div class="form-actions">
+                        <button type="submit" class="btn-submit">Submit</button>
+                        <button type="reset" class="btn-reset">Reset</button>
+                    </div>
+
+                    <!-- Success Message -->
+                    <div id="success-message" class="success-message" style="display: none;">
+                        <div class="success-content">
+                            <span class="success-icon">✓</span>
+                            <h3>Thank you for contacting us!</h3>
+                            <p>We've received your message and will get back to you soon.</p>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+    <div class="github-fab-container" id="fab"></div>
+
+    <script src="js/contact.js" type="module"></script>
+</body>
+</html>
