@@ -54,7 +54,7 @@ async function loadCountryDetails() {
 
   try {
     // Fetch basic data from REST Countries API
-    const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
+    const response = await fetch(`http://localhost:5000/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
     const data = await response.json();
     const country = data[0];
 
@@ -86,28 +86,28 @@ function populateCountryDetails(country, mockData) {
   document.getElementById('capital').textContent = country.capital?.[0] || 'N/A';
   document.getElementById('region').textContent = country.region || 'N/A';
   document.getElementById('subregion').textContent = country.subregion || 'N/A';
-  document.getElementById('area').textContent = country.area 
-    ? `${country.area.toLocaleString()} km²` 
+  document.getElementById('area').textContent = country.area
+    ? `${country.area.toLocaleString()} km²`
     : 'N/A';
 
   // Demographics
-  document.getElementById('population').textContent = country.population 
-    ? country.population.toLocaleString() 
+  document.getElementById('population').textContent = country.population
+    ? country.population.toLocaleString()
     : 'N/A';
   document.getElementById('density').textContent = mockData.density;
   document.getElementById('life-expectancy').textContent = mockData.lifeExpectancy;
   document.getElementById('literacy-rate').textContent = mockData.literacyRate;
 
   // Language & Culture
-  const languages = country.languages 
-    ? Object.values(country.languages).join(', ') 
+  const languages = country.languages
+    ? Object.values(country.languages).join(', ')
     : 'N/A';
   document.getElementById('languages').textContent = languages;
   document.getElementById('religions').textContent = mockData.religions;
   document.getElementById('ethnic-groups').textContent = mockData.ethnicGroups;
 
   // Economy
-  const currencies = country.currencies 
+  const currencies = country.currencies
     ? Object.values(country.currencies).map(c => `${c.name} (${c.symbol || ''})`).join(', ')
     : 'N/A';
   document.getElementById('currency').textContent = currencies;
@@ -116,10 +116,10 @@ function populateCountryDetails(country, mockData) {
   document.getElementById('industries').textContent = mockData.industries;
 
   // Geography
-  document.getElementById('coordinates').textContent = country.latlng 
-    ? `${country.latlng[0]}° N, ${country.latlng[1]}° E` 
+  document.getElementById('coordinates').textContent = country.latlng
+    ? `${country.latlng[0]}° N, ${country.latlng[1]}° E`
     : mockData.coordinates;
-  
+
   const borders = country.borders && country.borders.length > 0
     ? `${country.borders.length} countries`
     : 'Island nation / No land borders';

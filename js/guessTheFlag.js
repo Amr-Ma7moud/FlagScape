@@ -123,7 +123,7 @@ const els = {
 };
 
 async function fetchCountries() {
-    const res = await fetch("https://restcountries.com/v3.1/all?fields=name,flags");
+    const res = await fetch("http://localhost:5000/v3.1/all?fields=name,flags");
     const data = await res.json();
     // Filter countries that have both name and flags
     return data.filter(c => c?.name?.common && c?.flags?.png);
@@ -133,17 +133,17 @@ function updateStats() {
     const mode = MODES[state.mode];
     els.score.textContent = state.score;
     els.streak.textContent = state.streak;
-    
+
     if (mode?.suddenDeath) {
         els.question.textContent = state.question;
     } else {
         els.question.textContent = `${state.question}/${state.totalQuestions}`;
     }
-    
+
     if (mode?.useReserve) {
         els.reserveValue.textContent = state.timer.reserve;
     }
-    
+
     if (mode?.suddenDeath) {
         els.livesValue.textContent = "❤️";
     }
@@ -162,10 +162,10 @@ function pickRandom(arr, n) {
 function renderQuestion() {
     const mode = MODES[state.mode];
     updateStats();
-    
+
     const candidates = pickRandom(state.countries, 4);
     state.currentCountry = candidates[Math.floor(Math.random() * candidates.length)];
-    
+
     els.flag.onload = () => startTimer();
     els.flag.onerror = () => startTimer();
     els.flag.src = state.currentCountry.flags.png;
@@ -198,7 +198,7 @@ function renderQuestion() {
 function checkAnswer(btn, isCorrect) {
     const mode = MODES[state.mode];
     stopTimer();
-    
+
     // Disable interaction
     if (!mode.typing) {
         [...els.options.children].forEach(b => (b.disabled = true));
@@ -210,19 +210,19 @@ function checkAnswer(btn, isCorrect) {
         if (btn) btn.classList.add("correct");
         state.correctCount++;
         state.streak++;
-        
+
         // Scoring
         let points = 10 + state.streak * 5;
-        
+
         // Time bonus
         if (mode.useGlobalTimer) {
             points += Math.floor(state.timer.globalRemaining / 2);
         } else if (state.timer.remaining) {
             points += Math.floor(state.timer.remaining / 2);
         }
-        
+
         state.score += points;
-        
+
         // Reserve management (hybrid mode)
         if (mode.useReserve && state.timer.remaining >= 6) {
             state.timer.reserve = Math.min(mode.maxReserve, state.timer.reserve + 2);
@@ -234,15 +234,15 @@ function checkAnswer(btn, isCorrect) {
         else if (mode.typing) {
             els.typeInput.style.borderColor = "#dc3545";
         }
-        
+
         state.streak = 0;
-        
+
         // Sudden death - game over
         if (mode.suddenDeath) {
             setTimeout(() => endGame("💀 Game Over!", `You survived ${state.question} question${state.question !== 1 ? 's' : ''}!`), 1000);
             return;
         }
-        
+
         // Show correct answer
         if (!mode.typing) {
             [...els.options.children].forEach(b => {
@@ -252,28 +252,28 @@ function checkAnswer(btn, isCorrect) {
             });
         }
     }
-    
+
     updateStats();
     setTimeout(() => nextQuestion(), 800);
 }
 
 function nextQuestion() {
     const mode = MODES[state.mode];
-    
+
     // Check win condition
     if (!mode.suddenDeath && state.question >= state.totalQuestions) {
         let title = "🎉 Congratulations!";
         let message = `You completed ${mode.name}!`;
-        
+
         if (state.correctCount === state.totalQuestions) {
             title = "🏆 Perfect Score!";
             message = "Flawless victory! You're a geography master!";
         }
-        
+
         endGame(title, message);
         return;
     }
-    
+
     state.question++;
     renderQuestion();
 }
@@ -281,12 +281,12 @@ function nextQuestion() {
 function endGame(title, message) {
     const mode = MODES[state.mode];
     stopTimer();
-    
+
     els.resultTitle.textContent = title;
     els.resultMessage.textContent = message;
     els.finalScore.textContent = state.score;
     els.finalCorrect.textContent = state.correctCount;
-    
+
     // Show time remaining for speed run
     if (mode.useGlobalTimer) {
         els.finalTimeStat.classList.remove("hidden");
@@ -294,7 +294,7 @@ function endGame(title, message) {
     } else {
         els.finalTimeStat.classList.add("hidden");
     }
-    
+
     els.gameArea.classList.add("hidden");
     els.gameHeader.classList.add("hidden");
     els.result.classList.remove("hidden");
@@ -387,7 +387,7 @@ function setupTypingMode() {
             return;
         }
 
-        const matches = allCountryNames.filter(name => 
+        const matches = allCountryNames.filter(name =>
             name.toLowerCase().startsWith(input.toLowerCase())
         ).slice(0, 5);
 
@@ -405,7 +405,7 @@ function setupTypingMode() {
 
     const handleKeydown = (e) => {
         const items = els.autocomplete.querySelectorAll(".autocomplete-item");
-        
+
         if (e.key === "ArrowDown") {
             e.preventDefault();
             selectedIndex = Math.min(selectedIndex + 1, items.length - 1);
@@ -434,7 +434,7 @@ function setupTypingMode() {
         els.typeInput.removeEventListener("input", handleInput);
         els.typeInput.removeEventListener("keydown", handleKeydown);
         els.autocomplete.innerHTML = "";
-        
+
         const isCorrect = answer.toLowerCase() === state.currentCountry.name.common.toLowerCase();
         checkAnswer(null, isCorrect);
     };
@@ -452,18 +452,18 @@ function setupTypingMode() {
 function startTimer() {
     stopTimer();
     const mode = MODES[state.mode];
-    
+
     if (mode.useGlobalTimer) {
         // Speed run mode - global timer
         if (state.timer.globalRemaining <= 0) {
             endGame("⏱️ Time's Up!", "The clock ran out!");
             return;
         }
-        
+
         state.timer.intervalId = setInterval(() => {
             state.timer.globalRemaining -= 1;
             updateTimerUI();
-            
+
             if (state.timer.globalRemaining <= 0) {
                 stopTimer();
                 endGame("⏱️ Time's Up!", "The clock ran out!");
@@ -473,15 +473,15 @@ function startTimer() {
         // Per-question timer
         const bonus = mode.useReserve ? Math.min(state.timer.reserve, mode.maxPerQuestionBonus) : 0;
         if (mode.useReserve) state.timer.reserve -= bonus;
-        
+
         state.timer.totalThisQuestion = mode.basePerQuestion + bonus;
         state.timer.remaining = state.timer.totalThisQuestion;
         updateTimerUI();
-        
+
         state.timer.intervalId = setInterval(() => {
             state.timer.remaining -= 1;
             updateTimerUI();
-            
+
             if (state.timer.remaining <= 0) {
                 stopTimer();
                 checkAnswer(null, false);
@@ -499,29 +499,29 @@ function stopTimer() {
 
 function updateTimerUI() {
     const mode = MODES[state.mode];
-    
+
     if (mode.useGlobalTimer) {
         els.timerValue.textContent = state.timer.globalRemaining;
         els.timerValue.classList.remove("timer-warning", "timer-critical");
-        
+
         if (state.timer.globalRemaining <= 10) {
             els.timerValue.classList.add("timer-critical");
         } else if (state.timer.globalRemaining <= 30) {
             els.timerValue.classList.add("timer-warning");
         }
-        
+
         const pct = mode.globalTime ? (state.timer.globalRemaining / mode.globalTime) * 100 : 0;
         if (els.timerFill) els.timerFill.style.width = `${pct}%`;
     } else {
         els.timerValue.textContent = Math.max(0, state.timer.remaining);
         els.timerValue.classList.remove("timer-warning", "timer-critical");
-        
+
         if (state.timer.remaining <= 3) {
             els.timerValue.classList.add("timer-critical");
         } else if (state.timer.remaining <= 5) {
             els.timerValue.classList.add("timer-warning");
         }
-        
+
         const pct = state.timer.totalThisQuestion
             ? Math.max(0, Math.min(100, (state.timer.remaining / state.timer.totalThisQuestion) * 100))
             : 0;

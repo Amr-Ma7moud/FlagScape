@@ -25,7 +25,7 @@ let gameState = {
 
 async function fetchCountries() {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/all?fields=name,capital,cca3,flag,region,population,languages');
+    const response = await fetch('http://localhost:5000/v3.1/all?fields=name,capital,cca3,flag,region,population,languages');
     const data = await response.json();
     gameState.countries = data
       .filter(c => c.name?.common && c.capital)
@@ -41,14 +41,14 @@ function startTimer() {
     gameState.timeLeft--;
     document.getElementById('timer').textContent = gameState.timeLeft + 's';
     updateTimerBar();
-    
+
     const timerEl = document.getElementById('timer');
     if (gameState.timeLeft <= 10) {
       timerEl.classList.add('timer-critical');
     } else if (gameState.timeLeft <= 30) {
       timerEl.classList.add('timer-warning');
     }
-    
+
     if (gameState.timeLeft <= 0) {
       endGame();
     }
@@ -77,25 +77,25 @@ function generateQuestion() {
       correctAnswer = correctCountry.name.common;
       options = getRandomCountryNames(correctCountry, 4);
       break;
-    
+
     case 'capital':
       questionText = `What is the capital of ${correctCountry.name.common}?`;
       correctAnswer = correctCountry.capital[0];
       options = getRandomCapitals(correctCountry, 4);
       break;
-    
+
     case 'region':
       questionText = `Which region is ${correctCountry.name.common} located in?`;
       correctAnswer = correctCountry.region;
       options = getRandomRegions(correctCountry);
       break;
-    
+
     case 'population':
       questionText = `Approximately how many people live in ${correctCountry.name.common}?`;
       correctAnswer = formatPopulation(correctCountry.population);
       options = getPopulationOptions(correctCountry.population);
       break;
-    
+
     case 'language':
       if (correctCountry.languages) {
         const langs = Object.values(correctCountry.languages);
@@ -114,24 +114,24 @@ function generateQuestion() {
 function getRandomCountryNames(correct, count) {
   const options = [correct.name.common];
   const available = gameState.countries.filter(c => c.cca3 !== correct.cca3);
-  
+
   while (options.length < count && available.length > 0) {
     const randomIndex = Math.floor(Math.random() * available.length);
     options.push(available.splice(randomIndex, 1)[0].name.common);
   }
-  
+
   return options.sort(() => Math.random() - 0.5);
 }
 
 function getRandomCapitals(correct, count) {
   const options = [correct.capital[0]];
   const available = gameState.countries.filter(c => c.cca3 !== correct.cca3 && c.capital);
-  
+
   while (options.length < count && available.length > 0) {
     const randomIndex = Math.floor(Math.random() * available.length);
     options.push(available.splice(randomIndex, 1)[0].capital[0]);
   }
-  
+
   return options.sort(() => Math.random() - 0.5);
 }
 
@@ -165,28 +165,28 @@ function getPopulationOptions(correctPop) {
 function getRandomLanguages(correct, count) {
   const correctLangs = correct.languages ? Object.values(correct.languages) : [];
   if (correctLangs.length === 0) return [];
-  
+
   const options = [correctLangs[0]];
   const allLanguages = [];
-  
+
   gameState.countries.forEach(c => {
     if (c.languages && c.cca3 !== correct.cca3) {
       allLanguages.push(...Object.values(c.languages));
     }
   });
-  
+
   const uniqueLangs = [...new Set(allLanguages)];
   while (options.length < count && uniqueLangs.length > 0) {
     const randomIndex = Math.floor(Math.random() * uniqueLangs.length);
     options.push(uniqueLangs.splice(randomIndex, 1)[0]);
   }
-  
+
   return options.sort(() => Math.random() - 0.5);
 }
 
 function loadQuestion() {
   const question = generateQuestion();
-  
+
   document.getElementById('question-text').textContent = question.questionText;
 
   const optionsGrid = document.getElementById('options-grid');

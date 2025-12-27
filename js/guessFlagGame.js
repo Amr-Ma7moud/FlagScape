@@ -8,7 +8,7 @@ async function initializePage() {
   await embedHTML("sideBar", "htmlUtil/sideBar.html");
   await embedHTML("fab", "htmlUtil/fab.html");
   document.getElementById("hekal")?.appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
-  
+
   startGame();
 }
 
@@ -26,7 +26,7 @@ let gameState = {
 
 async function fetchCountries() {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/all');
+    const response = await fetch('http://localhost:5000/v3.1/all');
     const data = await response.json();
     // Filter out countries without flags and shuffle
     gameState.countries = data
@@ -40,12 +40,12 @@ async function fetchCountries() {
 function getRandomCountries(correct, count = 4) {
   const options = [correct];
   const available = gameState.countries.filter(c => c.cca3 !== correct.cca3);
-  
+
   while (options.length < count && available.length > 0) {
     const randomIndex = Math.floor(Math.random() * available.length);
     options.push(available.splice(randomIndex, 1)[0]);
   }
-  
+
   return options.sort(() => Math.random() - 0.5);
 }
 
@@ -124,7 +124,7 @@ function showResults() {
 async function startGame() {
   await fetchCountries();
   loadQuestion();
-  
+
   // Setup sidebar navigation
   document.querySelectorAll('#sideBar button[id]').forEach(btn => {
     btn.addEventListener('click', () => {

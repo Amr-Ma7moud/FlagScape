@@ -8,7 +8,7 @@ async function initializePage() {
   await embedHTML("fab", "htmlUtil/fab.html").then(() => {
     document.getElementById("hekal").appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
   });
-  
+
   startGame();
 }
 
@@ -25,7 +25,7 @@ let gameState = {
 
 async function fetchCountries() {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/all?fields=name,capital,cca3');
+    const response = await fetch('http://localhost:5000/v3.1/all?fields=name,capital,cca3');
     const data = await response.json();
     gameState.countries = data
       .filter(c => c.capital && c.capital[0] && c.name?.common)
@@ -39,11 +39,11 @@ function startTimer() {
   gameState.timer = setInterval(() => {
     gameState.timeLeft--;
     document.getElementById('timer').textContent = gameState.timeLeft + 's';
-    
+
     if (gameState.timeLeft <= 10) {
       document.getElementById('timer').classList.add('timer-critical');
     }
-    
+
     if (gameState.timeLeft <= 0) {
       endGame();
     }
@@ -53,7 +53,7 @@ function startTimer() {
 function getRandomCapitals(correct, count = 4) {
   const options = [correct.capital[0]];
   const available = gameState.countries.filter(c => c.cca3 !== correct.cca3);
-  
+
   while (options.length < count && available.length > 0) {
     const randomIndex = Math.floor(Math.random() * available.length);
     const country = available.splice(randomIndex, 1)[0];
@@ -61,7 +61,7 @@ function getRandomCapitals(correct, count = 4) {
       options.push(country.capital[0]);
     }
   }
-  
+
   return options.sort(() => Math.random() - 0.5);
 }
 
@@ -94,7 +94,7 @@ function checkAnswer(isCorrect, button) {
     gameState.score += points;
     gameState.correctAnswers++;
     gameState.timeLeft += 3; // Bonus time
-    
+
     // Level up every 5 correct answers
     if (gameState.correctAnswers % 5 === 0) {
       gameState.level++;

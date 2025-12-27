@@ -51,14 +51,14 @@ class CountryModal {
 
       this.countryData = data;
       this.populateModal(data);
-      
+
       // Show modal with animation
       this.modal.classList.add('modal-active');
       this.isOpen = true;
-      
+
       // Prevent body scroll
       document.body.style.overflow = 'hidden';
-      
+
       // Focus management for accessibility
       this.modal.querySelector('.modal-close')?.focus();
     } catch (error) {
@@ -71,24 +71,24 @@ class CountryModal {
 
     this.modal.classList.remove('modal-active');
     this.isOpen = false;
-    
+
     // Restore body scroll
     document.body.style.overflow = '';
   }
-  
-    async fetchCountryData(countryName) {
+
+  async fetchCountryData(countryName) {
     try {
-        const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
+      const response = await fetch(`http://localhost:5000/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
 
-        if (!response.ok) {
+      if (!response.ok) {
         throw new Error('Country not found');
-        }
+      }
 
-        const data = await response.json();
+      const data = await response.json();
       return data[0]; // API returns array, take first result
     } catch (error) {
-        console.error('Error fetching country data:', error);
-      
+      console.error('Error fetching country data:', error);
+
       // Fallback to basic info if API fails
       return {
         name: { common: countryName },
@@ -130,16 +130,16 @@ class CountryModal {
     // Population
     const populationEl = document.getElementById('modal-population');
     if (populationEl) {
-      populationEl.textContent = data.population 
-        ? data.population.toLocaleString() 
+      populationEl.textContent = data.population
+        ? data.population.toLocaleString()
         : 'N/A';
     }
 
     // Languages
     const languagesEl = document.getElementById('modal-languages');
     if (languagesEl) {
-      const languages = data.languages 
-        ? Object.values(data.languages).join(', ') 
+      const languages = data.languages
+        ? Object.values(data.languages).join(', ')
         : 'N/A';
       languagesEl.textContent = languages;
     }
@@ -147,7 +147,7 @@ class CountryModal {
     // Currency
     const currencyEl = document.getElementById('modal-currency');
     if (currencyEl) {
-      const currencies = data.currencies 
+      const currencies = data.currencies
         ? Object.values(data.currencies).map(c => `${c.name} (${c.symbol || ''})`).join(', ')
         : 'N/A';
       currencyEl.textContent = currencies;
