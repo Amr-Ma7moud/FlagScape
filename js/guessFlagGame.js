@@ -1,4 +1,5 @@
 import { embedHTML } from "../util/utils.js"
+import { getCountriesData } from "./api.js"
 
 // Load HTML components
 async function initializePage() {
@@ -7,7 +8,6 @@ async function initializePage() {
   await embedHTML("header", "htmlUtil/header.html");
   await embedHTML("sideBar", "htmlUtil/sideBar.html");
   await embedHTML("fab", "htmlUtil/fab.html");
-  document.getElementById("hekal")?.appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
   
   startGame();
 }
@@ -26,8 +26,7 @@ let gameState = {
 
 async function fetchCountries() {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/all');
-    const data = await response.json();
+    const data = await getCountriesData();
     // Filter out countries without flags and shuffle
     gameState.countries = data
       .filter(c => c.flags?.svg && c.name?.common)
@@ -123,6 +122,11 @@ function showResults() {
 
 async function startGame() {
   await fetchCountries();
+  if (!gameState.countries || gameState.countries.length === 0) {
+    const nameEl = document.getElementById('country-name');
+    if (nameEl) nameEl.textContent = 'Failed to load countries. Please refresh.';
+    return;
+  }
   loadQuestion();
   
   // Setup sidebar navigation

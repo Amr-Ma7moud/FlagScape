@@ -1,3 +1,5 @@
+import { getCountryByName } from "./api.js";
+
 // Country Modal Manager - Best Practices Implementation
 class CountryModal {
   constructor() {
@@ -76,18 +78,17 @@ class CountryModal {
     document.body.style.overflow = '';
   }
   
-    async fetchCountryData(countryName) {
+  async fetchCountryData(countryName) {
     try {
-        const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
+      const country = await getCountryByName(countryName);
 
-        if (!response.ok) {
+      if (!country) {
         throw new Error('Country not found');
-        }
+      }
 
-        const data = await response.json();
-      return data[0]; // API returns array, take first result
+      return country;
     } catch (error) {
-        console.error('Error fetching country data:', error);
+      console.error('Error fetching country data:', error);
       
       // Fallback to basic info if API fails
       return {

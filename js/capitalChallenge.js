@@ -1,13 +1,12 @@
 import { embedHTML } from "../util/utils.js"
+import { getCountriesData } from "./api.js"
 
 async function initializePage() {
   await embedHTML("head", "htmlUtil/head.html");
   document.title = "FlagScape - Capital Challenge";
   await embedHTML("header", "htmlUtil/header.html");
   await embedHTML("sideBar", "htmlUtil/sideBar.html");
-  await embedHTML("fab", "htmlUtil/fab.html").then(() => {
-    document.getElementById("hekal").appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
-  });
+  await embedHTML("fab", "htmlUtil/fab.html");
   
   startGame();
 }
@@ -25,8 +24,7 @@ let gameState = {
 
 async function fetchCountries() {
   try {
-    const response = await fetch('https://restcountries.com/v3.1/all?fields=name,capital,cca3');
-    const data = await response.json();
+    const data = await getCountriesData();
     gameState.countries = data
       .filter(c => c.capital && c.capital[0] && c.name?.common)
       .sort(() => Math.random() - 0.5);
@@ -135,6 +133,11 @@ function endGame() {
 
 async function startGame() {
   await fetchCountries();
+  if (!gameState.countries || gameState.countries.length === 0) {
+    const nameEl = document.getElementById('country-name');
+    if (nameEl) nameEl.textContent = 'Failed to load countries. Please refresh.';
+    return;
+  }
   loadQuestion();
   startTimer();
 }

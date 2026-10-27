@@ -1,4 +1,5 @@
 import { embedHTML } from "../util/utils.js";
+import { getCountriesData } from "./api.js";
 
 // Load shared components
 await embedHTML("head", "htmlUtil/head.html");
@@ -6,7 +7,6 @@ document.title = "Flag Scape - Guess The Flag";
 await embedHTML("header", "htmlUtil/header.html");
 await embedHTML("sideBar", "htmlUtil/sideBar.html");
 await embedHTML("fab", "htmlUtil/fab.html");
-document.getElementById("hekal")?.appendChild(document.createElement("span")).append("3mk Hekal");
 
 // Game modes configuration
 const MODES = {
@@ -123,8 +123,7 @@ const els = {
 };
 
 async function fetchCountries() {
-    const res = await fetch("https://restcountries.com/v3.1/all?fields=name,flags");
-    const data = await res.json();
+    const data = await getCountriesData();
     // Filter countries that have both name and flags
     return data.filter(c => c?.name?.common && c?.flags?.png);
 }

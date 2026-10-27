@@ -171,9 +171,7 @@ async function initializePage() {
   // Now that sidebar is loaded, set up event listeners
   setupNavigationListeners();
   setupMobileMenu();
-  
-  // Add Hekal span after fab is loaded as something weird happens here his nae doesn't render at the screen
-  document.getElementById("hekal").appendChild(document.createElement("span")).innerHTML = "3mk Hekal";
+
   
   // Check URL parameters for continent
   const urlParams = new URLSearchParams(window.location.search);

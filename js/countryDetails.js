@@ -1,4 +1,5 @@
 import { embedHTML } from "../util/utils.js"
+import { getCountryByName } from "./api.js"
 
 // Mock data generator for country details (until backend is ready)
 const mockCountryData = {
@@ -53,10 +54,11 @@ async function loadCountryDetails() {
   document.title = `FlagScape - ${countryName}`;
 
   try {
-    // Fetch basic data from REST Countries API
-    const response = await fetch(`https://restcountries.com/v3.1/name/${encodeURIComponent(countryName)}?fullText=true`);
-    const data = await response.json();
-    const country = data[0];
+    const country = await getCountryByName(countryName);
+
+    if (!country) {
+      throw new Error('Country not found');
+    }
 
     // Generate mock data for fields not in API
     const mockData = mockCountryData.generateMockData(countryName, country);
